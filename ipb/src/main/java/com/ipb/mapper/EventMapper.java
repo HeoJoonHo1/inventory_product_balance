@@ -5,6 +5,8 @@ import com.ipb.frame.MyMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface EventMapper extends MyMapper<Long, Event> {
@@ -13,4 +15,5 @@ public interface EventMapper extends MyMapper<Long, Event> {
   public Event selectByType(Long id) throws Exception;
 
   public Event findPreviousEvent(String dateString) throws Exception;
+
 }

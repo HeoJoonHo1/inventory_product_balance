@@ -7,11 +7,11 @@
     <!-- 전체 상품을 store_id로 다 조회하지만 재고가 0인 상품도 조회고  재고가 0이고 유통기한이 지난 상품은 안보여짐 (유통기한 기준으로 오름차순) -->
     <select id="selectstoreproduct" parameterType="Long" resultType="StoreProduct">
         SELECT sp.id,
-        pi.name as product_name,
+        pi.name as product_name,SUM(sp.qnt) as sp_qnt,
         p.price,
         pi.imgname,
-        pi.safe_qnt,
         sp.qnt,
+        p.cost,
         sp.is_using,
         pi.box_qnt,
         sp.is_auto,
@@ -29,6 +29,8 @@
         WHERE sp.store_id = 2
         AND ((sp.qnt > 0 AND p.exp >= DATE_ADD(CURDATE(), INTERVAL 1 DAY))
         OR (sp.qnt > 0 AND p.exp &lt; DATE_ADD(CURDATE(), INTERVAL 1 DAY)))
+        AND sp.qnt > 0 and p.qnt >= 0
+        GROUP BY sp.product_code
         ORDER BY p.exp ASC
     </select>
 
@@ -39,6 +41,7 @@
         p.price,
         pi.imgname,
         sp.qnt,
+        p.cost,
         sp.is_using,
         pi.box_qnt,
         sp.is_auto,
@@ -115,6 +118,7 @@
         sp.is_using,
         sp.is_auto,
         p.exp,
+        p.cost,
         pi.brand,
         pi.storage,
         c.name as category_name,
@@ -142,6 +146,7 @@
         pi.imgname,
         pi.safe_qnt,
         sp.is_using,
+        p.cost,
         sp.is_auto,
         pi.detail,
         p.exp,
@@ -207,6 +212,7 @@
         p.price,
         pi.box_qnt,
         pi.imgname,
+        p.cost,
         sp.is_using,
         p.exp,
         pi.brand,
@@ -290,6 +296,7 @@
                pi.box_qnt,
                sp.is_auto,
                pi.imgname,
+               p.cost,
                sp.is_using,
                pi.detail,
                p.exp,
@@ -318,6 +325,7 @@
                sp.is_auto,
                pi.box_qnt,
                pi.detail,
+               p.cost,
                sp.is_using,
                p.exp,
                pi.brand,
@@ -345,6 +353,7 @@
         sp.product_id,
         pi.name AS product_name,
         sp.qnt,
+        p.cost,
         sp.is_using,
         sp.is_auto,
         pi.product_code,
@@ -383,6 +392,7 @@
         pi.name AS product_name,
         p.price,
         sp.qnt,
+        p.cost,
         pi.box_qnt,
         sp.is_auto,
         pi.imgname,
