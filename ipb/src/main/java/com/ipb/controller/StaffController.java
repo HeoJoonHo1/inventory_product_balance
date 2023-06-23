@@ -84,7 +84,6 @@ public class StaffController {
         //DB에 날씨 데이터 최종 저장하기
         new_weather.setStore_id(staff.getStore_id());
         weatherService.register(new_weather);
-
 //        boolean isSame = old_weather.getStatus().equals(new_weather.getStatus());
 //        if(isSame) {
 //            // 날씨가 기존의 날씨와 동일하면 false 반환

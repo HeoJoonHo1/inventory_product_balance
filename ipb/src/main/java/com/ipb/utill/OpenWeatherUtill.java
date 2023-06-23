@@ -45,6 +45,7 @@ public class OpenWeatherUtill {
     JSONParser jsonParser = new JSONParser();
     JSONObject weather = (JSONObject)jsonParser.parse(txt);
     JSONArray weatherA = (JSONArray) weather.get("weather");
+    System.out.println("weatherA = " + weatherA);
     JSONObject WeatherB = (JSONObject) weatherA.get(0);
     String EWeather = (String)WeatherB.get("main");
     String icon = (String)WeatherB.get("icon");
